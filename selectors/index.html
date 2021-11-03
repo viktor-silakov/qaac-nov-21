@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        span {
+            border: 1px solid red;
+            display: block;
+            width: 100px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="form" style="margin: 20px;">
+        <h2>Leave your comments</h2>
+        <textarea type="text" placeholder="comment"></textarea>
+        <div name="comments"></div>
+        <button id="submit" onclick="writeComment()">Add comment</button>
+        <button onclick="removeComments()">Remove comment</button>
+    </div>
+</div>
+<br>
+<div class=text style="margin: 20px;">
+    <h2>Texts</h2>
+    <span>First text</span>
+    <span>Second text</span>
+    <span class="one two"> Multiclass   text </span>
+    <!--    $x("//span[@multitag]/.='Multitag text'") - вернет true, т.к. конкатенирует все строковые предстваления узлов-->
+    <!--    $x("//span[@multitag]/text()='.'") - вернет true т.к. всегда возвращает true если текст хотя бы одной из ноды совпадает-->
+    <!--    но некоторые другие функции например contains берут только первое значение и игнорят остальные-->
+    <!--    $x("//span[@multitag]/text()[2]") - вернет второй узел из 3-х -->
+    <span multitag="on">Multitag <br>text<br>.</span>
+    <!--    $x("//span[contains(.,'Multitag text2')]")-->
+    <span multitag2="on">Multitag <b>text2</b></span>
+</div>
+</body>
+<script>
+    const comment = document.getElementsByTagName('textarea')[0].value;
+    const comments = document.getElementsByName('comments')[0];
+
+    function writeComment() {
+        comments.innerText = 'wait for comment...'
+        setTimeout(() => {
+            comments.innerHTML = '';
+            comments.innerHTML = comments.innerHTML + '<p>comment</p>';
+        }, 2000)
+    }
+
+    function removeComments() {
+        comments.innerText = '';
+    }
+</script>
+</html>
